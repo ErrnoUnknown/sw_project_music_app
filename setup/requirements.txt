@@ -1,3 +1,4 @@
 streamlit
 pydub
 pyaudio
+st-clickable-images
