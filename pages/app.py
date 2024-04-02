@@ -1,7 +1,6 @@
-# streamlit run c:\Users\DICCE\Desktop\sw_project_music_app\piano.py
+# streamlit run c:\Users\DICCE\Desktop\sw_project_music_app\app.py
 
 # Import
-import threading as th
 from datetime import datetime
 import streamlit as st
 from pydub import AudioSegment
@@ -41,29 +40,10 @@ def record_note(note, time):
         time=time + 1000
     ))
 
-def note_handler():
-    global note_queue
-
-    start_time = datetime.now()
-
-    while True:
-        if note_queue:
-            note = note_queue.pop()
-
-            time_delta = (datetime.now() - start_time).total_seconds()
-
-            record_note(note, time_delta)
-            print(note, time_delta)
-
 # 메인
 mid = MidiFile()
 music_track = MidiTrack()
 mid.tracks.append(music_track)
-
-note_queue = []
-
-thread_note_handle = th.Thread(target=note_handler)
-thread_note_handle.start()
 
 if st.button('녹음하기'):
     # 버튼이 눌렸을 때 시작 시간 설정
@@ -76,5 +56,4 @@ if st.button('저장하기'):
 for key in PIANO_KEYS:
     if st.button(key):
         # 버튼이 눌렸을 때 소리 재생
-        note_queue.append(KEY_TO_NOTE[key])
         play_mp3(f'static/sound/piano_{key.lower()}.wav')

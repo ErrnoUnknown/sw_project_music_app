@@ -3,3 +3,4 @@ pydub
 pyaudio
 st-clickable-images
 mido
+pyaudio
