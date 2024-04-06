@@ -1,6 +1,5 @@
-streamlit
+flet
 pydub
 pyaudio
-st-clickable-images
 mido
 pyaudio
