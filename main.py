@@ -11,7 +11,8 @@ def main(page: ft.Page):
         raise NotImplementedError
 
     def on_home_btn_click(event):
-        raise NotImplementedError
+        route_change('/home')
+    
     def on_login_btn_click(event):
         raise NotImplementedError
     
@@ -72,6 +73,18 @@ def main(page: ft.Page):
                         [
                             ft.Text(value='Sign into', color='black', size=30),
                             ft.Text(value='Orchestra Maker', color='red', size=50),
+                        ], alignment=ft.MainAxisAlignment.CENTER),
+
+                    # 인풋 위젯
+                    ft.Divider(height=10, color='white'),
+                    ft.Row(
+                        [
+                        ft.Column(
+                            [
+                                ft.TextField(label='Username'),
+                                ft.TextField(label='Password'),
+                                ft.TextField(label='Confirm Password')
+                            ], alignment=ft.MainAxisAlignment.CENTER, width=300)
                         ], alignment=ft.MainAxisAlignment.CENTER),
 
                     # Try now 버튼
