@@ -1,9 +1,13 @@
 # 모듈 가져오기
+import time
 import flet as ft
 from module.play_inst import *
 
 # 홈 페이지
 def main(page: ft.Page):
+    # 변수 초기화
+    record_btn = None
+
     # 버튼 이벤트 함수 정의
     def route_to_home(event):
         route_change('/home')
@@ -13,6 +17,19 @@ def main(page: ft.Page):
 
     def route_to_app_elec_piano(event):
         route_change('/app/elec_piano')
+
+    def on_rec_btn_pressed(event):
+        record_btn.icon = None
+        
+        for i in range(3):
+            record_btn.text = f'{3 - i}...'
+            time.sleep(1)
+            print('aaa')
+
+        record_btn.icon = ft.icons.FIBER_MANUAL_RECORD_ROUNDED
+
+    def download_output(event):
+        pass
 
     # 라우팅 함수 정의
     def route_change(route):
@@ -86,6 +103,7 @@ def main(page: ft.Page):
                                 ft.Text(value='eqeqeqweeewewew', color='black', size=25)]
 
             # UI 구성
+            record_btn = ft.FilledButton(text='Record', style=ft.ButtonStyle(bgcolor='black', color='white'), on_click=on_rec_btn_pressed, width=200, icon=ft.icons.FIBER_MANUAL_RECORD_ROUNDED)
             view_contents = [ft.Row(
                 [   
                     ft.Row([
@@ -100,8 +118,15 @@ def main(page: ft.Page):
                         ft.Column(
                             [
                                 ft.Text(value=inst_name, color='black', size=45),
+                                ft.Divider(height=10),
+                                ft.Row(
+                                    [
+                                        record_btn,
+                                        ft.FilledButton(text='Save', style=ft.ButtonStyle(bgcolor='black', color='white'), on_click=download_output, width=200, icon=ft.icons.DOWNLOAD_ROUNDED)
+                                    ]),
+                                ft.Divider(height=10),
                                 ft.Divider(height=15, color='white'),
-                                ft.Column(app_contents, alignment=ft.alignment.top_left)
+                                ft.Column(app_contents, alignment=ft.alignment.top_left),
                             ])], height=1000)
                 ], alignment=ft.MainAxisAlignment.START, vertical_alignment=ft.MainAxisAlignment.START)]
 
